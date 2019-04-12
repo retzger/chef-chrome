@@ -10,13 +10,13 @@
 [osx]: https://travis-ci.org/dhoer/chef-chrome/branches
 [win]: https://ci.appveyor.com/project/dhoer/chef-chrome
 
-This cookbook installs Google Chrome browser (https://www.google.com/chrome/) at compile time, provides 
+This cookbook installs Google Chrome browser (https://www.google.com/chrome/) at compile time, provides
 `chrome_version` library method  to retrieve Chrome version installed, and provides `master_preferences` resource
 to set user preferences.
 
 ## Requirements
 
-Chef 12.14+
+Chef 14+
 
 ### Platforms
 
@@ -24,10 +24,6 @@ Chef 12.14+
 - Debian, Ubuntu
 - Mac OS X
 - Windows
-
-### Cookbooks
-
-- dmg - used by Mac OS X platform 
 
 ## Usage
 
@@ -50,24 +46,24 @@ allow_any_instance_of(Chef::Recipe).to receive(:chrome_version).and_return('50.0
 - `node['chrome']['track']` - For Linux only. Install stable, beta or unstable version. Default is `stable`.
 - `node['chrome']['32bit_only']` - For windows only. Install 32-bit browser on 64-bit machines. Default is `false`.
 
-See [attributes/default.rb](https://github.com/dhoer/chef-chrome/blob/master/attributes/default.rb) for complete list 
+See [attributes/default.rb](https://github.com/dhoer/chef-chrome/blob/master/attributes/default.rb) for complete list
 of attributes.
 
-## master_preferences 
+## master_preferences
 
 Manage a template resource that configures master_preferences.
 [More info...](http://www.chromium.org/administrators/configuring-other-preferences)
 
 ### Resource Attributes
 
-- `name` - The name of the preference. 
-- `cookbook` - Optional. Cookbook where the source template is. If this is not defined, Chef will use the named 
+- `name` - The name of the preference.
+- `cookbook` - Optional. Cookbook where the source template is. If this is not defined, Chef will use the named
 template in the cookbook where the definition is used.
 - `template` - Default `master_preferences.json.erb`, source template file.
 - `parameters` - Additional parameters, see Examples.
 
 ### Examples
-    
+
 The following example would look for a template named `master_preferences.json.erb` in your cookbook:
 
 ```ruby
@@ -80,7 +76,7 @@ chrome 'custom_preferences' do
 end
 ```
 
-The Chrome cookbook comes with a `master_preferences.json.erb` template as an example. The following parameter is used 
+The Chrome cookbook comes with a `master_preferences.json.erb` template as an example. The following parameter is used
 in the template:
 
 - `homepage` - Sets the homepage URL.
@@ -96,7 +92,7 @@ chrome 'set_user_preferences' do
   action :master_preferences
 end
 ```
-    
+
 The parameter specified will be used as:
 
 - `@parameters[:homepage]`
@@ -105,7 +101,7 @@ In the template, when you write your own, the `@` is significant.
 
 ## ChefSpec Matchers
 
-This cookbook includes custom [ChefSpec](https://github.com/sethvargo/chefspec) matchers you can use to test your 
+This cookbook includes custom [ChefSpec](https://github.com/sethvargo/chefspec) matchers you can use to test your
 own cookbooks.
 
 Example Matcher Usage
@@ -117,7 +113,7 @@ expect(chef_run).to master_preferences_chrome('name').with(
   }
 )
 ```
-      
+
 Cookbook Matchers
 
 - master_preferences_chrome(name)
